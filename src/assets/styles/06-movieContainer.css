@@ -1,0 +1,111 @@
+/* Estilos para la vista de grilla (predeterminada) */
+.movie-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.movie-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: rgb(127, 127, 127);
+    padding: 30px;
+    border-radius: 20px;
+    flex: 0 1 calc(25% - 10px);
+    margin: 5px;
+    box-sizing: border-box;
+
+    & img {
+        cursor: pointer;
+    }
+
+    & h3 {
+        font-size: 2em;
+        cursor: pointer;
+
+        &:hover {
+            color: blue;
+        }
+    }
+}
+
+.movie-overview {
+    max-height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    transition: max-height 0.6s ease-in-out;
+}
+
+.movie-overview.expanded {
+    max-height: 200px;
+    display: block;
+}
+
+.read-more-button {
+    background-color: transparent;
+    color: #02080c;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 5px;
+    margin-top: 5px;
+    text-decoration: underline;
+
+    &:hover {
+        color: #3d07e1;
+
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+/* Estilos para la vista de lista */
+.list-view {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+
+    & .movie-card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        max-width: none;
+        width: 95%;
+        margin: 50px;
+        padding: 20px;
+        margin-bottom: 15px;
+
+        & img {
+            width: 120px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        & h3 {
+            font-weight: bold;
+            font-size: 1.6em;
+        }
+    }
+
+    & .movie-overview {
+        display: none;
+    }
+}
+
+.list-view .movie-overview.expanded {
+    max-height: 200px;
+    display: block;
+}

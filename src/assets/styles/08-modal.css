@@ -1,0 +1,67 @@
+/* Estilos generales del modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenido del modal */
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    text-align: center;
+
+    & img {
+        width: 70%;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+
+    & h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    & p {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 10px;
+
+        & strong {
+            color: #333;
+            font-weight: bold;
+        }
+    }
+
+    & .rating {
+        font-weight: bold;
+        font-size: 20px;
+        margin-top: 10px;
+        color: #ff9800;
+
+    }
+}
+
+.details-button {
+    cursor: pointer;
+    font-size: 17px;
+
+    &:hover {
+        color: blue;
+    }
+}

@@ -1,0 +1,14 @@
+@import url(./01-reset.css);
+@import url(./02-utilities.css);
+@import url(./03-layout-box.css);
+@import url(./04-header.css);
+@import url(./05-buttons.css);
+@import url(./06-movieContainer.css);
+@import url(./07-select.css);
+@import url(./08-modal.css);
+@import url(./09-movieDetails.css);
+@import url(./10-infoFilmMovie.css);
+@import url(./11-reviews.css);
+@import url(./12-infoFilmRecommended.css);
+
+@import url(./99-footer.css);

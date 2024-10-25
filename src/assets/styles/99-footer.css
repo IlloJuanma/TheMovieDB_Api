@@ -1,0 +1,111 @@
+.footer-background {
+    background-color: #1A1D24;
+    min-height: 500px;
+    margin-top: 50px;
+
+    .footer-container_data {
+        display: flex;
+        color: #d2d2d2;
+        align-items: start;
+        gap: 100px;
+        padding-top: 130px;
+    }
+
+    .footer-data_rights {
+        color: #737373;
+        margin-top: 20px;
+    }
+
+    .footer-datalist {
+        color: #737373;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        li a:hover {
+            color: #d2d2d2;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+    }
+
+    .title {
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 30px;
+    }
+
+    .title-data {
+        text-transform: uppercase;
+        font-size: 17px;
+        font-weight: bold;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .title-data::after {
+        display: inline-block;
+        content: "";
+        height: 1px;
+        width: 28px;
+        background: #e0011a;
+        vertical-align: middle;
+        margin-left: 16px;
+    }
+
+    .footer-news {
+        margin-bottom: 15px;
+    }
+
+    .footer-news::after {
+        content: "→";
+        margin-left: 100px;
+        color: #fff;
+    }
+
+    .footer-data_social {
+        display: flex;
+        flex-direction: row;
+        margin-top: 30px;
+        gap: 10px;
+        cursor: pointer;
+    }
+
+    .footer-datalist form {
+        padding-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        & input[type="text"] {
+            border-bottom: 2px solid white;
+            padding-bottom: 5px;
+            color: white;
+            transition: border-bottom 0.3s ease;
+        }
+
+        & input[type="text"]:focus {
+            border-bottom: 2px solid red;
+
+        }
+
+        & input[type="submit"] {
+            color: red;
+            padding-top: 10px;
+            background-color: #383f4f;
+            border-radius: 5%;
+            text-transform: uppercase;
+            align-self: flex-start;
+            padding: 10px;
+        }
+
+        & input[type="submit"]:hover {
+            cursor: pointer;
+            background-color: #57627b;
+            transition: 0.3s;
+        }
+    }
+}

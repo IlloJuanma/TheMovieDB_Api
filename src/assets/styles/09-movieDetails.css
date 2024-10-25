@@ -1,0 +1,61 @@
+.backgroundFilm__container{
+    height: 30vh;
+}
+
+.backgroundFilm__container--info {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    color: white;
+}
+
+.back-backdrop {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    /* height: 100%; */
+    width: 100%;
+    object-fit: contain;
+    filter: brightness(0.3);
+    z-index: -1;
+}
+
+.back-poster {
+    margin-left: 20px;
+    z-index: 2;
+}
+
+.info__data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+    width: 70%;
+    padding: 20px;
+    z-index: 2;
+}
+.info_date--complete{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 15px;
+    & .info_date--genre{
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+    }
+}
+.info-summary{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+#back-catalog{
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}

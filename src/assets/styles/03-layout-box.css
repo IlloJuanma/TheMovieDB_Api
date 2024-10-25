@@ -1,0 +1,13 @@
+.layout-box {
+    max-inline-size: 1160px;
+    margin-inline: auto;
+}
+
+.layout-box2 {
+    max-inline-size: 1160px;
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    gap: 120px;
+    justify-content: space-between;
+}

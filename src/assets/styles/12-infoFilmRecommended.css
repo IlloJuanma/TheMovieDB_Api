@@ -1,0 +1,32 @@
+.recommended {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 50px;
+    margin-bottom: 50px;
+
+    & h2 {
+        color: white;
+        font-size: 2rem;
+        text-decoration: underline;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    & .recommended__container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 20px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        color: white;
+
+        & .recommended__info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+    }
+}

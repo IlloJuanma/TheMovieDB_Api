@@ -1,0 +1,39 @@
+.reviews__container {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    & h2 {
+        font-size: 1.5rem;
+        text-decoration: underline;
+    }
+
+    & .review {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 15px;
+        margin-top: 10px;
+        border-radius: 10px;
+        padding: 15px;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+
+        & h3 {
+            font-size: 1.2rem;
+            padding: 10px;
+            text-decoration: underline;
+        }
+
+        & .username {
+            padding: 10px;
+        }
+
+        & .text {
+            padding: 10px;
+            line-height: 24px;
+        }
+    }
+}
