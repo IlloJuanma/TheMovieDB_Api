@@ -1,11 +1,11 @@
-import { renderHeader } from "./components/Header";
-import { renderFooter } from "./components/Footer";
-import { listOptions, apiKey, language } from "./api/moviesUtilities";
-import { buttons } from "./components/Buttons";
-import { changeViewButton } from "./components/changeView";
-import { getLanguageMap } from "./components/languageMap";
-import { convertRuntimeToHoursAndMinutes } from "./components/convertTimetoHours";
-import { getReleaseDate } from "./components/getReleaseDate";
+import { renderHeader } from "./src/components/Header";
+import { renderFooter } from "./src/components/Footer";
+import { listOptions, apiKey, language } from "./src/api/moviesUtilities.js";
+import { buttons } from "./src/components/Buttons.js";
+import { changeViewButton } from "./src/components/changeView";
+import { getLanguageMap } from "./src/components/languageMap";
+import { convertRuntimeToHoursAndMinutes } from "./src/components/convertTimetoHours";
+import { getReleaseDate } from "./src/components/getReleaseDate";
 
 // Renderizar
 renderHeader();
