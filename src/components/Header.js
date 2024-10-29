@@ -1,12 +1,11 @@
 // Aqui vamos a renderizar el Header para importarlo dinámicamente en el main.js y luego en el index.html
-
 export function renderHeader() {
     const header = document.createElement('header');
     header.classList.add('header');
 
     header.innerHTML = `
         <div class="layout-box2">
-                <img src="../img/logo-1x.png" alt class="logo">
+                <img src="../assets/images/logo-1x.png" alt class="logo">
                 <nav class="nav">
                     <ul class="menu">
                         <li class="item"><a href="#">Home</a></li>

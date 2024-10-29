@@ -33,6 +33,10 @@
 
             & img{
                 width: 150px;
+                
+                &:hover{
+                    transform: scale(1.04);
+                }
             }
 
             & .actor--name{

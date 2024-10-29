@@ -365,8 +365,7 @@ async function backgroundFilm(movie, genreMap) {
           </ul>
         </div>
         <div class="info-summary">
-          <p>${movie.tagline}</p>
-          <h2>Vista General</h2>
+          <h2>${movie.tagline}</h2>
           <p>${movie.overview ? movie.overview : "Descripción: No se ha encontrado descripción"}</p>
         </div>
         <div class="info-director">

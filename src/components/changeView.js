@@ -21,6 +21,6 @@ export function changeViewButton() {
     viewButton.addEventListener('click', () => {
         isListView = !isListView;
         resetView();
-        viewButton.textContent = isListView ? 'Cambiar vista a grilla' : 'Cambiar vista a lista';
+        viewButton.textContent = isListView ? 'Cambiar vista a cuadrícula' : 'Cambiar vista a lista';
     });
 }

@@ -1,4 +1,4 @@
-.backgroundFilm__container{
+.backgroundFilm__container {
     height: 30vh;
 }
 
@@ -34,28 +34,56 @@
     width: 70%;
     padding: 20px;
     z-index: 2;
+
+    & h1 {
+        font-size: 1.4rem;
+    }
 }
-.info_date--complete{
+
+.info_date--complete {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     gap: 15px;
-    & .info_date--genre{
+
+    & .info_date--genre {
         display: flex;
         flex-direction: row;
         gap: 15px;
     }
 }
-.info-summary{
+
+.info-summary {
     display: flex;
     flex-direction: column;
     gap: 5px;
     margin-bottom: 15px;
     margin-top: 15px;
+
+    & h2 {
+        font-size: 1.1rem;
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.8);
+        letter-spacing: 0.05em;
+        margin-bottom: 5px;
+    }
 }
 
-#back-catalog{
+.info-director {
+    & h3 {
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+    }
+}
+
+#back-catalog {
     color: white;
     font-size: 1.5rem;
     cursor: pointer;
+    transition: transform 0.5s ease;
+
+    &:hover {
+        color: blue;
+        transform: scale(1.2);
+    }
 }
