@@ -1,3 +1,4 @@
+// Imports
 import { renderHeader } from "./src/components/Header";
 import { renderFooter } from "./src/components/Footer";
 import { listOptions, apiKey, language } from "./src/api/moviesUtilities.js";
@@ -6,21 +7,29 @@ import { changeViewButton } from "./src/components/changeView";
 import { getLanguageMap } from "./src/components/languageMap";
 import { convertRuntimeToHoursAndMinutes } from "./src/components/convertTimetoHours";
 import { getReleaseDate } from "./src/components/getReleaseDate";
+//----------------------------------------------------------------
 
 // Renderizar
 renderHeader();
 renderFooter();
+//----------------------------------------------------------------
 
+// Variables globales
 let currentFilter = null; // Variable para almacenar el filtro
 let isViewingDetails = false;
 let currentListOption = listOptions.popular;
+//----------------------------------------------------------------
+
+// Evento para cambiar la vista en la lista de peliculas
 document.addEventListener("DOMContentLoaded", () => {
   changeViewButton();
   getFetchMovies(listOptions.popular, language.es);
 });
+//----------------------------------------------------------------
 
-// Para conseguir las categorias de las peliculas necesitamos hacer otra llamada poara saber las categorias y sus ids correspondientes
-// (lo que tarde en averiguar esto madre mia)
+// Para conseguir las categorias de las peliculas necesitamos
+// hacer otra llamada para saber las categorias
+// y sus ids correspondientes
 async function fetchGenres(lang = language.es) {
   const apiUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=${lang}`;
   const response = await fetch(apiUrl);
@@ -39,7 +48,7 @@ async function fetchGenres(lang = language.es) {
     },
   */
 }
-
+//----------------------------------------------------------------
 
 // Funcion principal para obtener películas
 async function getFetchMovies(listOption, lang = language.es) {
@@ -47,17 +56,18 @@ async function getFetchMovies(listOption, lang = language.es) {
   try {
     const data = await fetchMovies(apiUrl);
     if (data.results) {
-
       const uniqueGenres = getUniqueCategories(data.results);
       const genresList = await fetchGenres(lang)
 
       // Creamos un objeto para guardar las id y los nombres de las categorias
       const genreMap = {};
+
       // Mapear las categorias
       genresList.forEach(genre => {
         // Le asignamos al objeto su id y nombre
         genreMap[genre.id] = genre.name;
       });
+      // Mostrar las peliculas en pantalla
       displayMovies(data.results, genreMap);
 
       // Convertir los IDs de géneros únicos en nombres
@@ -65,10 +75,11 @@ async function getFetchMovies(listOption, lang = language.es) {
 
       // Limpiar el contenedor del filtro antes de agregar el nuevo select
       const filterContainer = document.querySelector(".filter-container");
-      filterContainer.innerHTML = ''; // Limpia el contenedor
+      filterContainer.innerHTML = '';
 
       // Crear el select de las categorias dinámicamente
       const categoryFilter = document.createElement("select");
+
       // Agregamos la opcion no filtrar
       const noFilterOption = document.createElement("option");
       noFilterOption.textContent = "-- No filters --";
@@ -80,10 +91,11 @@ async function getFetchMovies(listOption, lang = language.es) {
       uniqueGenreNames.forEach((category, index) => {
         const option = document.createElement("option");
         option.textContent = category;
-        option.value = uniqueGenres[index]; // Cambiado para usar el ID
+        option.value = uniqueGenres[index];
         categoryFilter.appendChild(option);
       });
 
+      // Evento para cambiar la categoría de las peliculas en la lista de peliculas
       categoryFilter.addEventListener("change", async (event) => {
         const selectedGenreId = event.target.value;
         currentFilter = selectedGenreId;
@@ -98,6 +110,7 @@ async function getFetchMovies(listOption, lang = language.es) {
         }
 
       });
+      // Agregamos el select al contenedor del filtro
       document.querySelector(".filter-container").appendChild(categoryFilter);
     } else {
       const errorContainer = document.querySelector('.error-container');
@@ -105,32 +118,55 @@ async function getFetchMovies(listOption, lang = language.es) {
     }
   }
   catch (e) {
-    console.log(e);
+    const errorContainer = document.querySelector('.error-container');
+    if (errorContainer) {
+      errorContainer.textContent = ''; // Limpiamos el error anterior si existía, para mostrar el nuevo error.
+      console.error('Error:', e);
+      errorContainer.classList.add('error'); // Añadimos la clase error al error container para que se muestre en color rojo.
+      errorContainer.style.display = 'block'; // Mostramos el error container.
+      errorContainer.textContent = `Ocurrió un error: ${e.message}`; // Mostramos
+    }
   }
 }
+//----------------------------------------------------------------
 
 // Funcion para llamar a la Api
 async function fetchMovies(url) {
   const response = await fetch(url);
   return await response.json();
 }
+//----------------------------------------------------------------
 
-// Funcion para obtener películas por genero
+// Funcion para obtener películas por género
 async function getFetchMoviesByGenre(genreId, genreMap, lang = language.es) {
   const apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=${genreId}&language=${lang}`;
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
     if (data.results) {
-      displayMovies(data.results, genreMap); // Mostramos las peliculas filtradas
+      displayMovies(data.results, genreMap); // Mostramos las películas filtradas
     } else {
       const errorContainer = document.querySelector('.error-container');
-      errorContainer.textContent = 'No se encontraron resultados.';
+      if (errorContainer) {
+        errorContainer.textContent = '';
+        console.error('Error al mostrar');
+        errorContainer.classList.add('error');
+        errorContainer.style.display = 'block';
+        errorContainer.textContent = `Ocurrió un error al mostrar`;
+      }
     }
   } catch (e) {
-    console.log(e);
+    const errorContainer = document.querySelector('.error-container');
+    if (errorContainer) {
+      errorContainer.textContent = '';
+      console.error('Error:', e);
+      errorContainer.classList.add('error');
+      errorContainer.style.display = 'block';
+      errorContainer.textContent = `Ocurrió un error: ${e.message}`;
+    }
   }
 }
+//----------------------------------------------------------------
 
 // Funcion para obtener a los directores y actores
 async function getMovieCredits(movieId, lang = language.es) {
@@ -140,67 +176,100 @@ async function getMovieCredits(movieId, lang = language.es) {
     const data = await response.json();
     return data;
   } catch (e) {
-    console.log(e);
+    const errorContainer = document.querySelector('.error-container');
+    if (errorContainer) {
+      errorContainer.textContent = '';
+      console.error('Error:', e);
+      errorContainer.classList.add('error');
+      errorContainer.style.display = 'block';
+      errorContainer.textContent = `Ocurrió un error: ${e.message}`;
+    }
   }
 }
+//----------------------------------------------------------------
 
+// Funcion para obtener los detalles de una pelicula
 async function getMovieDetails(movieId, lang = language.es) {
   const apiUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=${lang}&append_to_response=credits,reviews,recommendations`;
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
     return data;
-
   } catch (e) {
-    console.log(e);
+    const errorContainer = document.querySelector('.error-container');
+    if (errorContainer) {
+      errorContainer.textContent = '';
+      console.error('Error:', e);
+      errorContainer.classList.add('error');
+      errorContainer.style.display = 'block';
+      errorContainer.textContent = `Ocurrió un error: ${e.message}`;
+    }
   }
 }
-
+//----------------------------------------------------------------
 
 // Creamos cada "card" de cada pelicula, recibiendo los datos que necesitamos
 function createCard(movie, genreMap, isListView = false) {
   const { id, title, overview, release_date, poster_path, vote_average, genre_ids } = movie;
+
+  // Formateamos la fecha
   const year = release_date.split('-')[0];
   const posterUrl = `https://image.tmdb.org/t/p/w300${poster_path}`;
 
+  // Creamos el div principal de la card
   const movieCard = document.createElement('div');
   movieCard.classList.add('movie-card');
 
+  // Creamos el poster
   const movieImage = document.createElement('img');
   movieImage.src = posterUrl;
+  // Le añadimos un evento click para mostrar detalles
   movieImage.addEventListener('click', () => openMovieDetails(movie, genreMap));
 
+  // Año de la película
   const movieYear = document.createElement('p');
   movieYear.textContent = `Año: ${year}`;
 
+  // Categoría de la película
   const movieCategory = document.createElement('p');
-  movieCategory.textContent = `Categoría: ${getGenresNames(genre_ids, genreMap)}`;
+  movieCategory.textContent = `${getGenresNames(genre_ids, genreMap)}`;
 
+  // Título de la película
   const movieTitle = document.createElement('h3');
   movieTitle.textContent = title;
+  // Le añadimos un evento click para mostrar detalles
   movieTitle.addEventListener("click", () => openMovieDetails(movie, genreMap));
 
+  // Descripción de la película
   const movieOverview = document.createElement('p');
   movieOverview.classList.add('movie-overview');
-  movieOverview.textContent = 'Descripción: ' + (overview ? overview : 'No se ha encontrado descripción');
+  // Si no se ha encontrado descripción...
+  movieOverview.textContent = (overview ? overview : 'No se ha encontrado descripción');
 
+  // Botón para leer más o menos la descripción
   const readMoreButton = document.createElement('button');
   readMoreButton.textContent = "Leer más";
   readMoreButton.classList.add('read-more-button');
 
-  readMoreButton.addEventListener('click', () => {
-    if (movieOverview.classList.contains('expanded')) {
-      movieOverview.classList.remove('expanded');
-      readMoreButton.textContent = 'Leer más';
-    } else {
-      movieOverview.classList.add('expanded');
-      readMoreButton.textContent = 'Leer menos';
-    }
-  });
-
+  // Si la descripción es más larga que 250 caracteres, muestra un botón para leer más
+  if (movieOverview.textContent.length < 250) {
+    readMoreButton.style.display = 'none';
+  } else {
+    readMoreButton.addEventListener('click', () => {
+      if (movieOverview.classList.contains('expanded')) {
+        movieOverview.classList.remove('expanded');
+        readMoreButton.textContent = 'Leer más';
+      } else {
+        movieOverview.classList.add('expanded');
+        readMoreButton.textContent = 'Leer menos';
+      }
+    });
+  }
+  // Puntaje de la película
   const movieRating = document.createElement('p');
   movieRating.textContent = `Puntaje: ${vote_average.toFixed(2)}`;
 
+  // Añade el div principal de la card al contenedor y sus hijos
   movieCard.appendChild(movieImage);
   movieCard.appendChild(movieYear);
   movieCard.appendChild(movieCategory);
@@ -210,7 +279,9 @@ function createCard(movie, genreMap, isListView = false) {
   movieCard.appendChild(movieRating);
   return movieCard;
 }
+//----------------------------------------------------------------
 
+// Funcion para mostrar peliculas
 async function displayMovies(movies, genreMap) {
   const moviesList = document.querySelector('.movie-container');
   moviesList.innerHTML = '';
@@ -221,6 +292,7 @@ async function displayMovies(movies, genreMap) {
 
     // Asigna el runtime al objeto movie
     movie.runtime = movieDetails.runtime;
+    // Asigna el tagline al objeto movie
     movie.tagline = movieDetails.tagline;
 
     // Crea la tarjeta de la película
@@ -243,6 +315,7 @@ async function displayMovies(movies, genreMap) {
     moviesList.appendChild(movieCard);
   }
 }
+//----------------------------------------------------------------
 
 // Funcion para abrir el modal
 async function openModal(movie, genreMap, isViewingDetails) {
@@ -257,8 +330,9 @@ async function openModal(movie, genreMap, isViewingDetails) {
   const credits = await getMovieCredits(movie.id);
   const first4Actors = credits.cast.slice(0, 4).map(actor => actor.name).join(', ');
 
-  // Obtenemos el director y los productores, antes debemos ver que existen
-  // Usamos filter, ya que nos devuelve un array de elementos, si usaramos find, nos devolveria el primero
+  // Obtenemos el director y los productores
+  // Usamos filter, ya que nos devuelve un array de elementos
+  // si usaramos find, nos devolveria el primero
   const director = credits.crew.filter(member => member.job === 'Director').map(director => director.name).join(', ');
 
   // Obtenemos a los productores
@@ -281,7 +355,6 @@ async function openModal(movie, genreMap, isViewingDetails) {
   // Mostrar el modal
   modal.style.display = "flex";
 
-
   // Cerrar el modal al hacer clic fuera de la ventana
   window.addEventListener("click", (event) => {
     if (event.target === modal) {
@@ -290,6 +363,7 @@ async function openModal(movie, genreMap, isViewingDetails) {
     }
   });
 }
+//----------------------------------------------------------------
 
 // Aqui creamos los botones que nos hemos importado de "buttons.js"
 // Usando un forEach
@@ -303,7 +377,8 @@ buttons.forEach(buttonInfo => {
 });
 
 // Ahora vamos a añadirle un evento click a cada boton
-// Mapeamos las clases de los botones a sus respectivas opciones en listOptions
+// Mapeamos las clases de los botones a sus respectivas
+// opciones en listOptions
 const buttonActions = {
   'popular-button': listOptions.popular,
   'upcoming-button': listOptions.upcoming,
@@ -314,6 +389,8 @@ const buttonActions = {
 // Iteramos sobre el objeto y agregamos los evetListeners a cada botón
 Object.keys(buttonActions).forEach(className => {
   const button = document.querySelector(`.${className}`);
+  // Si el botón existe, le añadimos el evento click para cambiar
+  // la lista de peliculas
   if (button) {
     button.addEventListener('click', () => {
       currentListOption = buttonActions[className];
@@ -321,6 +398,7 @@ Object.keys(buttonActions).forEach(className => {
     });
   }
 })
+//----------------------------------------------------------------
 
 // Creamos una función para seleccionar las categorias de las peliculas
 function getUniqueCategories(movies) {
@@ -329,21 +407,30 @@ function getUniqueCategories(movies) {
   const uniqueIds = Array.from(new Set(genreIds));
   return uniqueIds;
 }
+//----------------------------------------------------------------
 
-// Para poder mostrar las categorias en las "cards", vamos a crear otra funcion para los nombres
+// Para poder mostrar las categorias en las "cards", vamos a 
+// crear otra funcion para los nombres
 function getGenresNames(genreIds, genreMap) {
   return genreIds.map(id => genreMap[id] || 'Desconocido').join(', ');
 }
+//----------------------------------------------------------------
 
-
-// -------------------------------- DISPLAY -------------------------------------------------
+// -------------------------DISPLAY-------------------------------
+// Funcion de la primera parte de la vista detalles
 async function backgroundFilm(movie, genreMap) {
+  // Obtener los genres de la pelicula
   const genres = getGenresNames(movie.genre_ids, genreMap);
+
+  // Convertir el tiempo de duración a horas y minutos
   const convertedTime = convertRuntimeToHoursAndMinutes(movie.runtime);
 
+  // Obtener los créditos de la pelicula
   const credits = await getMovieCredits(movie.id);
+  // Filtrar por 'Director'
   const directorInfo = credits.crew.filter(member => member.job === 'Director');
 
+  // Creamos la lista 'li' de géneros
   const genresItems = `<li class="info_date--genre">${genres}</li>
   `;
 
@@ -376,13 +463,15 @@ async function backgroundFilm(movie, genreMap) {
     </div>
   </div>
 </section>
-
     `
 };
+//----------------------------------------------------------------
 
+// Funcion de la segunda parte de la vista detalles
 async function infoFilmMovie(movie) {
   //Detalles de la pelicula y creditos
   const details = await getMovieDetails(movie.id);
+  // Del primero hasta el sexto
   const first4Actors = details.credits.cast.slice(0, 6);
 
   // Presupuesto
@@ -429,6 +518,7 @@ async function infoFilmMovie(movie) {
     </section>
   `;
 }
+//----------------------------------------------------------------
 
 // Funcion de las reseñas de las peliculas
 async function getReviewsMovies(movie) {
@@ -469,10 +559,19 @@ async function getReviewsMovies(movie) {
     </section>   
     `
   } catch (e) {
-    console.error("Error: ", e);
+    const errorContainer = document.querySelector('.error-container');
+    if (errorContainer) {
+      errorContainer.textContent = '';
+      console.error('Error:', e);
+      errorContainer.classList.add('error');
+      errorContainer.style.display = 'block';
+      errorContainer.textContent = `Ocurrió un error: ${e.message}`;
+    }
   }
 }
+//----------------------------------------------------------------
 
+// Funcion de las películas recomendadas
 async function getRecommendedMovies(movie) {
   const details = await getMovieDetails(movie.id);
   const recommendations = details.recommendations.results;
@@ -480,13 +579,14 @@ async function getRecommendedMovies(movie) {
   // Guardar peliculas con "vote_average" > 6.5
   const moviesRecommended = recommendations.filter(movie => movie.vote_average > 6.5);
 
+  // Limpiamos
   let moviesRecommendedHTML = '';
 
+  // Comprobar
   if (moviesRecommended.length > 0) {
     moviesRecommended.forEach(movie => {
       const title = movie.title;
       const poster = `https://image.tmdb.org/t/p/w200${movie.poster_path}`;
-
       moviesRecommendedHTML += `
       <div class="recommended__info">  
           <img src="${poster}" alt="${title}" class="recommended-image">
@@ -507,6 +607,7 @@ async function getRecommendedMovies(movie) {
   </section>
   `
 }
+//----------------------------------------------------------------
 
 // Parte de la vista detallada de cada pelicula
 async function openMovieDetails(movie, genreMap) {
@@ -531,17 +632,19 @@ async function openMovieDetails(movie, genreMap) {
   errorContainer.classList.add('hidden');
   movieContainer.classList.add('hidden');
   if (movieContainer.classList.contains('list-view')) {
+    // Guardamos el estado para volver a ella después
     isListView = true;
     movieContainer.classList.remove('list-view');
   }
 
   // Guardamos las categorias de la pelicula
-  const credits = await getMovieCredits(movie.id);
+  // const credits = await getMovieCredits(movie.id);
 
   const backgroundFilmHtml = backgroundFilm(movie, genreMap);
   const infoFilmMovieHtml = infoFilmMovie(movie);
   const getReviews = getReviewsMovies(movie);
   const recommendedMoviesHtml = getRecommendedMovies(movie);
+
   // Aquí vamos a renderizar la nueva vista de los detalles, para eso vamos a usar una funcion
   root.innerHTML = `
     ${await backgroundFilmHtml}
@@ -563,6 +666,7 @@ async function openMovieDetails(movie, genreMap) {
     nowPlayingButton.classList.remove('hidden');
     errorContainer.classList.remove('hidden');
     movieContainer.classList.remove('hidden');
+    // Usamos el estado guardado de antes para volver al mismo estado
     if (isListView) {
       movieContainer.classList.add('list-view');
     }

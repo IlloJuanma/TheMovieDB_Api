@@ -1,3 +1,4 @@
+// Objeto languageMap por si fuera necesario
 const languageMap = {
     en: "Inglés",
     es: "Español",
@@ -10,6 +11,6 @@ const languageMap = {
     pt: "Portugués"
 };
 
-export function getLanguageMap(languageCode){
+export function getLanguageMap(languageCode) {
     return languageMap[languageCode] || "Idioma desconocido";
 }

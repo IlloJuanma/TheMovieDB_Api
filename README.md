@@ -6,6 +6,8 @@ El objetivo de este proyecto es crear una aplicación web que permita a los usua
 # GITHUB - PAGES
 https://illojuanma.github.io/TheMovieDB_Api/
 
+Esta vista, aunque funcional, no está actualizada. Para obtener la versión actualizada, clonar repositorio, instalar dependencias (npm install) y run (npm run dev), asi poder ver en local
+
 ## Características
 
 - **Interfaz de usuario dinámica:** Los usuarios pueden interactuar con diferentes botones para ver las películas según varias categorías.
@@ -19,4 +21,4 @@ https://illojuanma.github.io/TheMovieDB_Api/
 - JavaScript
 - API de The Movie Database (TMDb)
 
-## EN DESARROLLO
+## EN DESARROLLO (RESPONSIVO NO AÑADIDO)

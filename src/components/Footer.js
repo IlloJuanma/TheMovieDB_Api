@@ -1,9 +1,7 @@
 // Aqui vamos a renderizar el Footer para importarlo dinámicamente en el main.js y luego en el index.html
-
 export function renderFooter() {
     const footer = document.createElement('footer');
     footer.classList.add('footer-background');
-
     footer.innerHTML = `
         <div class="footer-container">
                 <ul class="footer-container_data layout-box">

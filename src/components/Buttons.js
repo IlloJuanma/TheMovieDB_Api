@@ -1,3 +1,4 @@
+// Objeto botón
 export const buttons = [
     { text: "Popular", class: "popular-button" },
     { text: "Upcoming Movies", class: "upcoming-button" },

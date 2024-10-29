@@ -1,4 +1,4 @@
-.movie-cast{
+.movie-cast {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -6,24 +6,24 @@
 
 }
 
-.movie__cast--container{
+.movie__cast--container {
     display: flex;
     flex-direction: column;
     gap: 15px;
     padding: 20px;
-    
-    & h2{
+
+    & h2 {
         font-size: 1.3rem;
         color: white;
     }
 
-    & .cast__data--container{
+    & .cast__data--container {
         display: flex;
         flex-direction: row;
         gap: 10px;
         padding: 10px;
-        
-        & .cast__data--info{
+
+        & .cast__data--info {
             display: flex;
             flex-direction: column;
             gap: 5px;
@@ -31,33 +31,34 @@
             margin-bottom: 25px;
             padding: 5px;
 
-            & img{
+            & img {
                 width: 150px;
-                
-                &:hover{
+
+                &:hover {
                     transform: scale(1.04);
                 }
             }
 
-            & .actor--name{
+            & .actor--name {
                 font-size: 1.1rem;
                 font-weight: bold;
             }
 
-            & .actor--character{
+            & .actor--character {
                 max-width: 150px;
             }
         }
     }
 }
-.movie__cast--infoContainer{
+
+.movie__cast--infoContainer {
     display: flex;
     flex-direction: column;
     color: white;
     gap: 20px;
     margin-bottom: 25px;
 
-    & h4{
+    & h4 {
         font-weight: bold;
         line-height: 1.5;
         margin-bottom: 5px;

@@ -1,9 +1,10 @@
-.buttons{
+.buttons {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    & button{
+
+    & button {
         background-color: rgb(16, 108, 229);
         border-radius: 10px;
         padding: 15px;
@@ -11,12 +12,13 @@
     }
 }
 
-.button-container{
+.button-container {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin: 25px; 
-    & button{
+    margin: 25px;
+
+    & button {
         background-color: rgb(16, 108, 229);
         border-radius: 10px;
         padding: 15px;

@@ -2,10 +2,9 @@
 export function renderHeader() {
     const header = document.createElement('header');
     header.classList.add('header');
-
+    // <img src="../assets/images/logo-1x.png" alt class="logo">
     header.innerHTML = `
         <div class="layout-box2">
-                <img src="../assets/images/logo-1x.png" alt class="logo">
                 <nav class="nav">
                     <ul class="menu">
                         <li class="item"><a href="#">Home</a></li>

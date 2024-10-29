@@ -1,4 +1,4 @@
-// Funciones y utilidades de las Apis
+// Utilidades de las Apis
 export const apiKey = '60a5853d1efe26bdd53ff300c6705db1';
 
 // Categorías películas
